@@ -28,7 +28,7 @@ require_once($CFG->libdir . "/tablelib.php");
 $id = required_param("id", PARAM_INT);
 $course = get_course($id);
 require_login($course);
-$PAGE->set_url(new moodle_url("/mod/exiticket/index.php", ["id" => $course->id]));
+$PAGE->set_url(new moodle_url("/mod/exiticket/", ["id" => $course->id]));
 $PAGE->set_title(get_string("modulenameplural", "mod_exiticket"));
 $PAGE->set_heading(format_string($course->fullname));
 
