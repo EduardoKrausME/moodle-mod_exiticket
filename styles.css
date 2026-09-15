@@ -1,0 +1,8 @@
+.mod-exiticket-summary .display-6 {
+    font-weight: 600;
+}
+
+.mod-exiticket-own-response .card,
+.mod-exiticket-summary .card {
+    border-radius: .75rem;
+}
