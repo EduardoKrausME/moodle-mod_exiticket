@@ -38,6 +38,7 @@ $PAGE->set_title(get_string("report", "mod_exiticket"));
 $PAGE->set_heading(format_string($course->fullname));
 $PAGE->navbar->add(get_string("report", "mod_exiticket"));
 
+// The manager rejects group 0 for restricted users in separate-groups mode.
 $groupid = groups_get_activity_group($cm, true);
 $report = \mod_exiticket\manager::get_report_data($exiticket, $context, $groupid);
 $rate = $report["eligiblecount"] > 0 ? round(($report["responsecount"] / $report["eligiblecount"]) * 100) : 0;

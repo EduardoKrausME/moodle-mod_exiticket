@@ -61,7 +61,7 @@ function exiticket_supports(string $feature) {
  * @param mod_exiticket_mod_form|null $mform Form instance.
  * @return int New instance id.
  */
-function exiticket_add_instance(stdClass $data, mod_exiticket_mod_form $mform = null): int {
+function exiticket_add_instance(stdClass $data, ?mod_exiticket_mod_form $mform = null): int {
     global $DB;
 
     $data->timecreated = time();
@@ -76,7 +76,7 @@ function exiticket_add_instance(stdClass $data, mod_exiticket_mod_form $mform = 
  * @param mod_exiticket_mod_form|null $mform Form instance.
  * @return bool
  */
-function exiticket_update_instance(stdClass $data, mod_exiticket_mod_form $mform = null): bool {
+function exiticket_update_instance(stdClass $data, ?mod_exiticket_mod_form $mform = null): bool {
     global $DB;
 
     $data->id = $data->instance;

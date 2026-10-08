@@ -110,15 +110,27 @@ class manager {
      * @return array
      */
     public static function get_report_data(\stdClass $exiticket, \context_module $context, int $groupid = 0): array {
-        global $DB;
+        global $DB, $USER;
 
-        $users = get_enrolled_users(
+        // Group 0 means all participants to get_enrolled_users(), but not to a restricted teacher.
+        // Recheck group membership here so callers cannot bypass the report page's group selector.
+        $cm = get_coursemodule_from_id("exiticket", $context->instanceid, 0, false, MUST_EXIST);
+        $canviewgroup = true;
+        if (groups_get_activity_groupmode($cm) == SEPARATEGROUPS
+                && !has_capability("moodle/site:accessallgroups", $context)) {
+            $allowedgroups = $groupid > 0
+                ? groups_get_all_groups($cm->course, $USER->id, $cm->groupingid)
+                : [];
+            $canviewgroup = isset($allowedgroups[$groupid]);
+        }
+
+        $users = $canviewgroup ? get_enrolled_users(
             $context,
             "mod/exiticket:submit",
             $groupid,
             "u.id,u.firstname,u.lastname,u.firstnamephonetic,u.lastnamephonetic,u.middlename,u.alternatename,u.email",
             "u.lastname ASC, u.firstname ASC"
-        );
+        ) : [];
         $userids = array_keys($users);
 
         $responses = [];
