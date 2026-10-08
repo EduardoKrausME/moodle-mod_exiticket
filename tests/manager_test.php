@@ -27,7 +27,7 @@ namespace mod_exiticket;
 /**
  * Regression tests for the report's separate-groups access control.
  *
- * @covers \\mod_exiticket\\manager
+ * @covers \mod_exiticket\manager
  */
 final class manager_test extends \advanced_testcase {
     /**
